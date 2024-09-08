@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>James's Portfolio</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+</head>
+<body>
+    <div id="particles-js"></div>
+    <section class="portfolio-container">
+        <header class="portfolio-base">
+            <nav class="top-bar">
+                <span class="blue-text">James's</span> <span class="red-text">Portfolio</span>
+            </nav>
+            <h1 class="hero">
+                <span class="green-text">Hi</span>, I am <span class="red-text">James</span>.
+            </h1>
+            <div class="content-wrapper">
+                <div class="content-grid">
+                    <main class="main-column">
+                        <section class="roles-section">
+                            <div class="roles-grid">
+                                <div class="role-column">
+                                    <div class="role-content">
+                                        <h2 class="section-title">I am a...</h2>
+                                        <article class="role-card">
+                                            <h3 class="role-title">Developer</h3>
+                                            <p class="role-description">I am a developer; I mainly create Python projects and sometimes Javascript projects. I created a lot of AI projects, such as Juroku.AI, Furi.AI v3, Uri.AI, H-Agent, and UltimateAGI.</p>
+                                        </article>
+                                    </div>
+                                </div>
+                                <div class="role-column">
+                                    <div class="role-content">
+                                        <article class="role-card">
+                                            <h3 class="role-title">Gamer</h3>
+                                            <p class="role-description">I loved playing games like Minecraft, Roblox, Fortnite, GTA-V, and CSGO. But I stopped playing games since they are boring now.</p>
+                                        </article>
+                                        <article class="role-card">
+                                            <h3 class="role-title">Hacker</h3>
+                                            <p class="role-description">Back when I started learning how to code, I mainly learned how to code by hacking games like Fortnite, Minecraft, and sometimes CSGO. I also created DDoS tools in the old days.</p>
+                                        </article>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                    </main>
+                    <aside class="secondary-column">
+                        <h2 class="projects-title">Projects</h2>
+                        <div id="projects-container">
+                            <article class="project-card">
+                                <h3 class="project-title">Furi.AI V3</h3>
+                                <p class="project-info"><strong>Info:</strong> Furi.AI is an AI powered Aim-Assist. It's created specifically for only Fortnite.</p>
+                                <p class="project-info"><strong>Features:</strong></p>
+                                <p class="project-info">- AimAssist | It aims at a player by using an AI Image ...</p>
+                                <p class="project-info"><strong>Tags:</strong> <span class="tag">AI</span> <span class="tag">Python</span> <span class="tag">V3</span></p>
+                            </article>
+                            <article class="project-card">
+                                <h3 class="project-title">Juroku.AI</h3>
+                                <p class="project-info"><strong>Info:</strong> Juroku.AI is a openai reverse proxy, where I reverse engineer websites that uses openai or andriod apps that uses openai. [LEGAL]</p>
+                                <p class="project-info"><strong>Features:</strong></p>
+                                <p class="project-info">- claude-3.5-sonnet, gpt-4o, gpt-4-turbo, and midjourney, I have around 50 models and 40 websites and 20 apps I reverse engineered.</p>
+                                <p class="project-info"><strong>Demo:</strong></p>
+                                <p class="project-info">- [none yet]</p>
+                                <p class="project-info">- Release date in 2025, public and free.</p>
+                                <p class="project-info"><strong>Tags:</strong> <span class="tag">AI</span> <span class="tag">Python</span> <span class="tag">V1</span></p>
+                            </article>
+                        </div>
+                        <button id="show-more-btn" style="display: none;">Show More</button>
+                    </aside>
+                </div>
+            </div>
+        </header>
+    </section>
+
+    <script>
+        particlesJS.load('particles-js', 'particles.json', function() {
+            console.log('particles.js loaded - callback');
+        });
+    
+        document.addEventListener('DOMContentLoaded', function() {
+            const projectsContainer = document.getElementById('projects-container');
+            const showMoreBtn = document.getElementById('show-more-btn');
+            const projectCards = projectsContainer.getElementsByClassName('project-card');
+            let showingAll = false;
+    
+            function initializeProjects() {
+                if (projectCards.length > 1) {
+                    // Hide all projects except the first one
+                    for (let i = 1; i < projectCards.length; i++) {
+                        projectCards[i].style.display = 'none';
+                    }
+                    showMoreBtn.style.display = 'block';
+                }
+            }
+    
+            function toggleProjects() {
+                window.location.href = 'projects.html'; // Navigate to the projects page
+            }
+    
+            initializeProjects();
+            showMoreBtn.addEventListener('click', toggleProjects);
+    
+            // Typing animation
+            const texts = [
+                "<span class='green-text'>Hi</span>, I am <span class='red-text'>James</span>.",
+                "Made this website in 2 mins"
+            ];
+            let textIndex = 0;
+            let charIndex = 0;
+            const typingSpeed = 100; // milliseconds
+            const pauseBetweenTexts = 2000; // milliseconds
+    
+            function typeText() {
+                if (textIndex < texts.length) {
+                    if (charIndex < texts[textIndex].length) {
+                        document.getElementById('typing-text').innerHTML += texts[textIndex].charAt(charIndex);
+                        charIndex++;
+                        setTimeout(typeText, typingSpeed);
+                    } else {
+                        setTimeout(eraseText, pauseBetweenTexts);
+                    }
+                }
+            }
+    
+            function eraseText() {
+                if (charIndex > 0) {
+                    let currentText = texts[textIndex].substring(0, charIndex - 1);
+                    document.getElementById('typing-text').innerHTML = currentText;
+                    charIndex--;
+                    setTimeout(eraseText, typingSpeed / 2);
+                } else {
+                    textIndex++;
+                    if (textIndex >= texts.length) {
+                        textIndex = 0;
+                    }
+                    setTimeout(typeText, typingSpeed);
+                }
+            }
+    
+            typeText();
+        });
+    </script>
+</body>
+</html>
